@@ -24,3 +24,35 @@ $(function () {
 
 var currentDate = dayjs().format("dddd, MMMM D");
 $("#currentDay").text(currentDate);
+
+function startCalendar(){
+
+  // for i of the hour with an dayjs > then whenTime = past
+  var workHours = "12"
+  var whenTime = "future"
+  
+  // Add time blocks to the HTML
+  
+    var timeBlockEl = $("<div>").addClass("row time-block");
+  
+    timeBlockEl.addClass(whenTime);
+  
+    timeBlockEl.attr("id", workHours);
+    var hourEl = $("<div>")
+      .addClass("col-2 col-md-1 hour text-center py-3")
+      .text(workHours);
+    var descriptionEl = $("<textarea>")
+      .addClass("col-8 col-md-10 description")
+      .attr("rows", 3);
+    var saveBtnEl = $("<button>")
+      .addClass("btn saveBtn col-2 col-md-1")
+      .attr("aria-label", "save")
+      .html("<i class='fas fa-save' aria-hidden='true'></i>");
+    timeBlockEl.append(hourEl, descriptionEl, saveBtnEl);
+    $(".container-fluid").append(timeBlockEl);
+  
+  
+  }
+  
+  
+  startCalendar();
