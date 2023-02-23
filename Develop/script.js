@@ -28,31 +28,43 @@ $("#currentDay").text(currentDate);
 function startCalendar(){
 
   // for i of the hour with an dayjs > then whenTime = past
-  var workHours = "12"
-  var whenTime = "future"
+var workHours = ["11","12"]
+var whenTime = ""
+var displayTime = ""
   
   // Add time blocks to the HTML
-  
+  for (var i = 0; i < workHours.length; i++) {
+
+    tempHours = workHours[i]
+    if (tempHours === "11") {
+      whenTime = "past"
+      displayTime = workHours[i]
+      console.log(displayTime)
+    } else {
+      whenTime = "present"
+      displayTime = workHours[i]
+    }
+
+
     var timeBlockEl = $("<div>").addClass("row time-block");
-  
     timeBlockEl.addClass(whenTime);
-  
-    timeBlockEl.attr("id", workHours);
+    timeBlockEl.attr("id", displayTime);
     var hourEl = $("<div>")
       .addClass("col-2 col-md-1 hour text-center py-3")
-      .text(workHours);
+      .text(displayTime);
     var descriptionEl = $("<textarea>")
       .addClass("col-8 col-md-10 description")
       .attr("rows", 3);
+      // console.log("rows", 3);
     var saveBtnEl = $("<button>")
       .addClass("btn saveBtn col-2 col-md-1")
       .attr("aria-label", "save")
       .html("<i class='fas fa-save' aria-hidden='true'></i>");
     timeBlockEl.append(hourEl, descriptionEl, saveBtnEl);
     $(".container-fluid").append(timeBlockEl);
-  
-  
   }
+  
+}
   
   
   startCalendar();
