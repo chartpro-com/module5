@@ -25,21 +25,28 @@ $(function () {
 var currentDate = dayjs().format("dddd, MMMM D");
 $("#currentDay").text(currentDate);
 
+
 function startCalendar(){
 
   // for i of the hour with an dayjs > then whenTime = past
-var workHours = ["11","12"]
+var workHours = ["8","12"]
 var whenTime = ""
 var displayTime = ""
-  
+var currentHour = dayjs().hour();
+console.log(currentHour)
+
   // Add time blocks to the HTML
   for (var i = 0; i < workHours.length; i++) {
+
+    if (currentHour > workHours[i]) {
+      console.log("hi");
+    };
 
     tempHours = workHours[i]
     if (tempHours === "11") {
       whenTime = "past"
       displayTime = workHours[i]
-      console.log(displayTime)
+      // console.log(displayTime)
     } else {
       whenTime = "present"
       displayTime = workHours[i]
