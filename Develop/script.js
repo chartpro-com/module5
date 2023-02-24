@@ -32,12 +32,13 @@ function startCalendar(){
   var workHours = ["9","10","11","12","13","14","15","16","17"]
   var whenTime = ""
   var currentHour = dayjs().hour();
-  var displayTime
-  // console.log(currentHour)
+  var displayTime = ""
+
 
   // Add time blocks to the HTML
     for (var i = 0; i < workHours.length; i++) {
 
+      // had to use double equals since compaing an int and a string
       if (currentHour == workHours[i]) {
         whenTime = "present"
       } else if (currentHour < workHours[i]){
@@ -65,9 +66,22 @@ function startCalendar(){
         .html("<i class='fas fa-save' aria-hidden='true'></i>");
       timeBlockEl.append(hourEl, descriptionEl, saveBtnEl);
       $(".container-fluid").append(timeBlockEl);
+
+      // grab any saved event in local storage for this block
+      var savedEvent = localStorage.getItem(displayTime);
+      if (savedEvent !== null) {
+      $("#" + displayTime + " .description").val(savedEvent);
+      }
     }
+    // click listner needs to be outside the for loop above
+    $(".saveBtn").on("click", function () {
+      var parent = $(this).parent();
+      var id = parent.attr("id");
+      var eventText = parent.find(".description").val();
+      localStorage.setItem(id, eventText);
+    });
+
   
 }
-  
   
   startCalendar();
